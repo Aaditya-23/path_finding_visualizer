@@ -1,0 +1,30 @@
+.tile-area {
+  width: 85vw;
+  padding: 5px 0 5px 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  border: 2px solid steelblue;
+  border-radius: 8px;
+}
+
+.tile {
+  width: 0.7cm;
+  height: 0.7cm;
+  border: 1.5px solid steelblue;
+  border-radius: 5px;
+}
+
+.tile-active {
+  background-color: steelblue;
+  animation: animate-tile 0.2s ease-in-out 2 alternate;
+}
+
+@keyframes animate-tile {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Handpainted Low Poly Pillar
+* source:	https://sketchfab.com/3d-models/handpainted-low-poly-pillar-36ac4ab1047c410f853f7c5b1e847a80
+* author:	Igor Skugar (https://sketchfab.com/igorskuhar)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Handpainted Low Poly Pillar" (https://sketchfab.com/3d-models/handpainted-low-poly-pillar-36ac4ab1047c410f853f7c5b1e847a80) by Igor Skugar (https://sketchfab.com/igorskuhar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

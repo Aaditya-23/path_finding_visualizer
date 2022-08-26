@@ -1,0 +1,35 @@
+.navbar {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 10px 2px gray;
+}
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-transform: capitalize;
+}
+
+.nav-list1,
+.nav-list2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list2 {
+  gap: 1rem;
+}
+
+.nav-heading {
+  font-family: "DynaPuff", cursive;
+  font-size: 2rem;
+}
+
+.nav-links {
+  font-weight: 500;
+}
