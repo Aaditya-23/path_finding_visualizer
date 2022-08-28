@@ -1,0 +1,77 @@
+main {
+  font-family: "DynaPuff", cursive;
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.motto {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 2cm;
+}
+
+/* .tech-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tech-heading {
+  font-size: 4vw;
+}
+
+.section {
+  width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #1C2833;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tech-container {
+  min-height: 100%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.tech-info img {
+  width: 1.5in;
+  height: 1.5in;
+}
+
+.tech-name {
+  font-size: 2rem;
+  text-align: center;
+  color: #d0d0d0;
+} */
+
+.rotatingGrid {
+  height: 4in;
+}
+
+.white-text {
+  color: white;
+}
+
+.cyan-text {
+  color: #3ce9e3;
+}
+
+.green-text {
+  color: #6bd968;
+}
+
+.yellow-text {
+  color: #fecc1b;
+}

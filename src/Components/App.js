@@ -1,15 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar/Navbar";
-import Sup from "./Sup";
 import "../Assets/CSS/app.css";
 import Visualizer from "./Visualizer/Visualizer";
+import Home from "./Home/Home";
 
 function App() {
   return (
     <div className="App" style={{ height: "100vh" }}>
       <Routes>
-        <Route path="/" element={<Navbar />} />
-        <Route path="/sup" element={<Sup />} />
+        <Route path="/" element={<Home />} />
         <Route path="/visualizer" element={<Visualizer />} />
       </Routes>
     </div>
