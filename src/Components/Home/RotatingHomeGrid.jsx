@@ -28,7 +28,6 @@ function GenerateTiles() {
     x = rows;
     z -= 2.1;
   }
-
   return Tiles;
 }
 

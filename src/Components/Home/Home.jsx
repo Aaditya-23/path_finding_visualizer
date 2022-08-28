@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import RotatingHomeGrid from "./RotatingHomeGrid";
+import { useSelector } from "react-redux";
 import "./Styles.css";
 
 // import ThreeLogo from "../../Assets/Images/ThreeLogo.svg";
@@ -9,8 +10,6 @@ import "./Styles.css";
 // import ReduxLogo from "../../Assets/Images/ReduxLogo.svg";
 
 export default function () {
-  const [isLoaded, setLoaded] = useState(false);
-
   return (
     <>
       <Navbar />
@@ -23,27 +22,58 @@ export default function () {
             <span className="white-text">World.</span>
           </div>
           <div className="rotatingGrid">
-            <RotatingHomeGrid props={{ setLoaded }} />
+            <RotatingHomeGrid />
+          </div>
+        </div>
+
+        <div className="features">
+          <div className="feature-container">
+            <div
+              className="feature-name green-text"
+              initial={{ x: -200 }}
+              animate={{ x: 100 }}
+              transition={{ delay: 1.5 }}
+            >
+              Orbital Controls
+            </div>
+            <div className="feature-description">
+              Grid is set up in a 3-Dimensional world. You can use your mouse to
+              PAN the scene. ZOOM in and out of the scene which is set up in
+              OUTER SPACE!
+            </div>
           </div>
 
-          <div className="features">
-            <div className="feature1">
-              <motion.div className="feature-name" animate={{ x: 100 }}>
-                Orbit Controls
-              </motion.div>
-              <div className="feature-description"></div>
+          <div className="feature-container">
+            <div className="feature-description">
+              Drawing over the maze again and again can be CUMBERSOME!
+              So You can use 
             </div>
-            <div className="feature2">
-              <motion.div className="feature-name" animate={{ x: 100 }}>
-                Maze Generator
-              </motion.div>
-              <div className="feature-description"></div>
+            <div
+              className="feature-name cyan-text"
+              style={{ textAlign: "end" }}
+              initial={{ x: -200 }}
+              animate={{ x: 100 }}
+              transition={{ delay: 1.5 }}
+            >
+              Maze Generator
             </div>
-            <div className="feature3">
-              <motion.div className="feature-name" animate={{ x: 100 }}>
-                More Algorithms
-              </motion.div>
-              <div className="feature-description"></div>
+          </div>
+
+          <div className="feature-container">
+            <div
+              className="feature-name yellow-text"
+              initial={{ x: -200 }}
+              animate={{ x: 100 }}
+              transition={{ delay: 1.5 }}
+            >
+              More Algorithms
+            </div>
+            <div className="feature-description">
+              Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+              IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+              IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+              IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+              Ipsum{" "}
             </div>
           </div>
         </div>

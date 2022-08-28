@@ -5,18 +5,21 @@ import "./Assets/CSS/index.css";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import GlobalReducer from "./Redux/GlobalSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    Global: GlobalReducer,
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
       <BrowserRouter>
+    <Provider store={store}>
         <App />
-      </BrowserRouter>
     </Provider>
+      </BrowserRouter>
   </React.StrictMode>
 );
