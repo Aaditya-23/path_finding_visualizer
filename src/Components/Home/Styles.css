@@ -3,7 +3,7 @@ main {
   margin-top: 10rem;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 8rem;
 }
 
 .motto {
@@ -60,7 +60,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18rem;
+  margin-bottom: 0.5in;
 }
 
 .feature-container {
@@ -71,12 +71,160 @@ main {
 .feature-name {
   align-self: center;
   width: 40%;
-  font-size: 2rem;
+  font-size: 5vw;
 }
 
 .feature-description {
   width: 60%;
+  font-size: 1.5rem;
   line-height: 5rem;
+}
+
+.bttn-getStarted {
+  margin: auto;
+  padding: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  color: white;
+  background: #00b4db;
+  background: -webkit-linear-gradient(to right, #0083b0, #00b4db);
+  background: linear-gradient(to right, #0083b0, #00b4db);
+  box-shadow: 0px 4px 10px 0px whitesmoke;
+}
+
+.redirectLinks {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* background-color: red; */
+}
+
+/* .card {
+  width: 35%;
+  height: 2.5in;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  border-radius: 1.5rem;
+  background-color: #212f3c;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-info {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border: 2px solid royalblue;
+}
+
+.card-heading {
+  font-size: 1.8rem;
+}
+
+.card-divider {
+  width: 100%;
+  height: 1px;
+  margin: 1rem 0;
+  background-color: grey;
+  border-radius: 2px;
+} */
+
+.device-view {
+  margin: auto;
+  width: 60vw;
+  height: 80vh;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  border-radius: 2rem;
+  background-color: black;
+  /* border: 0.1px solid whitesmoke; */
+  /* box-shadow: -5px -3px 2px 0px grey, 2px -2px 0 0 grey, -1px 2px 0px 1px grey; */
+  box-shadow: 0 0 5px 0 grey;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.9rem;
+  display: flex;
+  background-color: hsl(200, 18%, 26%);
+  overflow: hidden;
+}
+
+.drawer {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  border-right: 1px solid whitesmoke;
+  overflow: hidden;
+}
+
+.drawer-logo {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  text-align: end;
+  border-top-left-radius: inherit;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.drawerList {
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom-left-radius: inherit;
+}
+
+.list-element {
+  min-width: fit-content;
+  padding: 1.5rem 0.5rem;
+  transform: scale(1) translateX(0);
+  transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.list-element:hover {
+  transform: scale(1.1) translateX(2px);
+  background-color: hsl(200, 18%, 36%);
+}
+
+.profiles {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.screen-layout {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  color: white;
+  /* background-color: royalblue; */
+  display: flex;
+  gap: 1rem;
+}
+
+.screen-content {
 }
 
 .rotatingGrid {
@@ -97,4 +245,14 @@ main {
 
 .yellow-text {
   color: #fecc1b;
+}
+
+.bump-fontSize {
+  font-size: 3rem;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: pink;
 }
