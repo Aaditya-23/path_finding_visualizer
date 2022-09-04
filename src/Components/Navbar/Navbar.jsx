@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Styles.css";
 
-export default function () {
+export default function Navbar() {
   return (
     <nav className="navbar">
       <ul className="nav-list nav-list1">

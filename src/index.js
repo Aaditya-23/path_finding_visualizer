@@ -1,25 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./Components/App";
-import "./Assets/CSS/index.css";
+import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import GlobalReducer from "./Redux/GlobalSlice";
+import AlgorithmsSlice from "./Redux/AlgorithmsSlice";
 
 const store = configureStore({
   reducer: {
-    Global: GlobalReducer,
+    algorithms: AlgorithmsSlice,
   },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-      <BrowserRouter>
     <Provider store={store}>
+      <BrowserRouter>
         <App />
-    </Provider>
       </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

@@ -77,7 +77,9 @@ export default function DeviceView() {
         </motion.div>
 
         <div className="screen-layout">
-          <span onClick={openDrawer}>{!isOpen && <AutoAwesomeMosaic />}</span>
+          <span style={{ padding: "0.5rem" }} onClick={openDrawer}>
+            {!isOpen && <AutoAwesomeMosaic />}
+          </span>
           <div className="screen-content">
             <Outlet />
           </div>

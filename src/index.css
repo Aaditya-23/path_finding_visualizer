@@ -11,3 +11,12 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+.App {
+  user-select: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
