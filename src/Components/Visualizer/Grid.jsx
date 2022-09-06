@@ -84,6 +84,8 @@ function Tiles({ props }) {
           index,
           isSource,
           isTarget,
+          isExplored,
+          isInPath,
           setTileColor,
           setIsObstruction,
           setIsTarget,
@@ -129,8 +131,6 @@ export default function Grid({ props }) {
     setIsSelectingSource,
     isSelectingTarget,
     setIsSelectingTarget,
-    setSource,
-    setTarget,
   } = props;
 
   const { scene } = useThree();
@@ -168,23 +168,15 @@ export default function Grid({ props }) {
               setIsTarget,
             },
           } = object;
-
+          
           if (!isObstruction) {
             if (isSelectingSource && !isTarget) {
-              setSource(() => {
-                return { row: index.row, column: index.column };
-              });
-
               prevSource(() => false);
               setPrevSource(() => setIsSource);
               setIsSource(() => true);
               setIsSelectingSource(() => false);
               return;
             } else if (isSelectingTarget && !isSource) {
-              setTarget(() => {
-                return { row: index.row, column: index.column };
-              });
-
               prevTarget(() => false);
               setPrevTarget(() => setIsTarget);
               setIsTarget(() => true);

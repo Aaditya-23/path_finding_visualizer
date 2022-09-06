@@ -3,7 +3,13 @@ import { AutoAwesomeMosaicRounded, Close } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import Button from "../Custom/Button/Button";
 import Select from "../Custom/Select/Select";
-import { DFS } from "../Algorithms/Algorithms";
+import {
+  BFS,
+  clearEverything,
+  clearPath,
+  DFS,
+  generateVirtualGrid,
+} from "../Algorithms/Algorithms";
 import "./Styles.css";
 
 export default function DialogBox({ props }) {
@@ -13,10 +19,8 @@ export default function DialogBox({ props }) {
     setIsSelectingSource,
     isSelectingTarget,
     setIsSelectingTarget,
-    source,
   } = props;
 
-  const [grid, setGrid] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -35,6 +39,10 @@ export default function DialogBox({ props }) {
       window.removeEventListener("keydown", pressEscape);
     };
   }, []);
+
+  useEffect(() => {
+    if (scene) generateVirtualGrid(scene);
+  }, [scene]);
 
   const variants = {
     initial: {
@@ -121,7 +129,27 @@ export default function DialogBox({ props }) {
           />
           <div
             onClick={() => {
-              DFS(scene, source);
+              clearPath();
+              setIsOpen(() => false);
+            }}
+          >
+            <Button props={{ title: "clear path", bgcolor: "steelblue" }} />
+          </div>
+
+          <div
+            onClick={() => {
+              clearEverything();
+              setIsOpen(() => false);
+            }}
+          >
+            <Button
+              props={{ title: "clear everything", bgcolor: "steelblue" }}
+            />
+          </div>
+
+          <div
+            onClick={() => {
+              BFS(scene);
               setIsOpen(() => false);
             }}
           >
@@ -132,32 +160,3 @@ export default function DialogBox({ props }) {
     </>
   );
 }
-
-// const handleClick = () => {
-//   const meshes = scene.children[3].children;
-//   const temp_grid = Array(20)
-//     .fill()
-//     .map(() => Array(20).fill(null));
-
-//   meshes.forEach((item) => {
-//     if (item.name !== "tile") return;
-
-//     const {
-//       index,
-//       isObstruction,
-//       customPosition,
-//       isTarget,
-//       isStart,
-//       setTileColor,
-//     } = item;
-//     temp_grid[index.row][index.column] = {
-//       isObstruction,
-//       customPosition,
-//       isTarget,
-//       isStart,
-//       setTileColor,
-//     };
-//   });
-
-//   setGrid(temp_grid);
-// };

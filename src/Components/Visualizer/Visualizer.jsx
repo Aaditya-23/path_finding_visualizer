@@ -15,12 +15,6 @@ export default function Visualizer({ props }) {
 
   const [isSelectingSource, setIsSelectingSource] = useState(false);
   const [isSelectingTarget, setIsSelectingTarget] = useState(false);
-  const [source, setSource] = useState(() => {
-    return { row: null, column: null };
-  });
-  const [target, setTarget] = useState(() => {
-    return { row: null, column: null };
-  });
 
   const { scene, setScene } = props;
 
@@ -69,8 +63,6 @@ export default function Visualizer({ props }) {
           setIsSelectingSource,
           isSelectingTarget,
           setIsSelectingTarget,
-          source,
-          target,
         }}
       />
       <Canvas camera={{ position: [10, 15, -22] }}>
@@ -97,8 +89,6 @@ export default function Visualizer({ props }) {
             setIsSelectingSource,
             isSelectingTarget,
             setIsSelectingTarget,
-            setSource,
-            setTarget,
           }}
         />
       </Canvas>
