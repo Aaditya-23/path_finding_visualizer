@@ -5,11 +5,11 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import AlgorithmsSlice from "./Redux/AlgorithmsSlice";
+import ActionSlice from "./Redux/ActionsSlice";
 
 const store = configureStore({
   reducer: {
-    algorithms: AlgorithmsSlice,
+    actions: ActionSlice,
   },
 });
 

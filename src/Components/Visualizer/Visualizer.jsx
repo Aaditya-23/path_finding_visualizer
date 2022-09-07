@@ -6,15 +6,18 @@ import DialogBox from "../DialogBox/DialogBox";
 import "./Styles.css";
 
 export default function Visualizer({ props }) {
+  const [isSelectingSource, setIsSelectingSource] = useState(false);
+  const [isSelectingTarget, setIsSelectingTarget] = useState(false);
+  const [currentAlgorithm, setCurrentAlgorithm] = useState("default");
+  const [model, setModel] = useState("pillar");
   const [gridDimensions, setGridDimensions] = useState({
     rows: 20,
     columns: 20,
+    dropdown: 0,
   });
+  const [visualizingSpeed, setVisualizingSpeed] = useState("fast");
 
   const [isMouseDown, setMouseDown] = useState(false);
-
-  const [isSelectingSource, setIsSelectingSource] = useState(false);
-  const [isSelectingTarget, setIsSelectingTarget] = useState(false);
 
   const { scene, setScene } = props;
 
@@ -60,11 +63,20 @@ export default function Visualizer({ props }) {
         props={{
           scene,
           isSelectingSource,
-          setIsSelectingSource,
           isSelectingTarget,
+          currentAlgorithm,
+          model,
+          gridDimensions,
+          visualizingSpeed,
+          setIsSelectingSource,
           setIsSelectingTarget,
+          setCurrentAlgorithm,
+          setModel,
+          setGridDimensions,
+          setVisualizingSpeed,
         }}
       />
+
       <Canvas camera={{ position: [10, 15, -22] }}>
         <OrbitControls enabled={!isMouseDown} />
         <Stars
@@ -80,15 +92,16 @@ export default function Visualizer({ props }) {
         <spotLight position={[10, 1, 5]} angle={0.5} castShadow />
         <Grid
           props={{
+            isSelectingSource,
+            isSelectingTarget,
+            model,
             gridDimensions,
             generateGrid,
             isMouseDown,
+            setIsSelectingSource,
+            setIsSelectingTarget,
             setMouseDown,
             setScene,
-            isSelectingSource,
-            setIsSelectingSource,
-            isSelectingTarget,
-            setIsSelectingTarget,
           }}
         />
       </Canvas>

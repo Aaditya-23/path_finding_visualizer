@@ -8,8 +8,6 @@ const isVisited = Array(20)
   .fill()
   .map(() => Array(20).fill(false));
 
-let path = [];
-
 let source = { row: null, column: null };
 
 const resetIsVisited = () => {
@@ -29,12 +27,14 @@ export const generateVirtualGrid = (scene) => {
       const {
         customProps: {
           isObstruction,
+          isBomb,
           isSource,
           isTarget,
           isExplored,
           isInPath,
           index: { row, column },
           setIsObstruction,
+          setIsBomb,
           setTileColor,
           setIsExplored,
           setIsInPath,
@@ -45,11 +45,13 @@ export const generateVirtualGrid = (scene) => {
 
       grid[row][column] = {
         isObstruction,
+        isBomb,
         isSource,
         isTarget,
         isExplored,
         isInPath,
         setIsObstruction,
+        setIsBomb,
         setTileColor,
         setIsExplored,
         setIsInPath,
@@ -62,24 +64,7 @@ export const generateVirtualGrid = (scene) => {
   });
 };
 
-export const clearPath = () => {
-  const row = grid.length;
-  const column = grid[0].length;
-
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < column; j++) {
-      const { setIsExplored, setIsInPath, setIsSource, setIsTarget } =
-        grid[i][j];
-
-      setIsExplored(() => false);
-      setIsInPath(() => false);
-      setIsSource(() => false);
-      setIsTarget(() => false);
-    }
-  }
-};
-
-export const clearEverything = () => {
+export const clearGrid = (parameter) => {
   const row = grid.length;
   const column = grid[0].length;
 
@@ -87,17 +72,22 @@ export const clearEverything = () => {
     for (let j = 0; j < column; j++) {
       const {
         setIsObstruction,
+        setIsBomb,
         setIsExplored,
         setIsInPath,
         setIsSource,
         setIsTarget,
       } = grid[i][j];
 
-      setIsObstruction(() => false);
       setIsExplored(() => false);
       setIsInPath(() => false);
-      setIsSource(() => false);
-      setIsTarget(() => false);
+
+      if (parameter) {
+        setIsObstruction(() => false);
+        setIsBomb(() => false);
+        setIsSource(() => false);
+        setIsTarget(() => false);
+      }
     }
   }
 };
@@ -107,9 +97,11 @@ const isValidMove = (newX, newY) => {
 };
 
 export const DFS = (scene) => {
-  generateVirtualGrid(scene);
+  clearGrid(false);
   resetIsVisited();
-  path = [];
+  generateVirtualGrid(scene);
+
+  let path = [];
 
   let counter = 0;
   const recurDFS = (currPath, x, y) => {
@@ -170,9 +162,9 @@ export const DFS = (scene) => {
 };
 
 export const BFS = (scene) => {
-  generateVirtualGrid(scene);
+  clearGrid(false);
   resetIsVisited();
-  path = [];
+  generateVirtualGrid(scene);
 
   let counter = 0;
 
@@ -207,7 +199,7 @@ export const BFS = (scene) => {
             if (grid[newX][newY].isTarget) {
               setTimeout(() => {
                 grid[newX][newY].setIsExplored(() => true);
-
+                front.path.push([newX, newY]);
                 front.path.map((tile, index) => {
                   setTimeout(() => {
                     let row = tile[0];
@@ -243,4 +235,133 @@ export const BFS = (scene) => {
   let y = source.column;
 
   runBFS(currPath, x, y);
+};
+
+export const dijkstra = (scene) => {
+  clearGrid(false);
+  resetIsVisited();
+  generateVirtualGrid(scene);
+
+  let counter = 0;
+
+  const runDijkstra = (currPath, x, y) => {
+    const rows = grid.length;
+    const columns = grid[0].length;
+    const distanceArray = Array(rows)
+      .fill()
+      .map(() => Array(columns).fill(null));
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        let dist = i === x && j === y ? 0 : Infinity;
+        distanceArray[i][j] = {
+          distance: dist,
+          parentIndex: [-1, -1],
+        };
+      }
+    }
+
+    let currX = x;
+    let currY = y;
+
+    let moves = [
+      [-1, 0],
+      [0, 1],
+      [1, 0],
+      [0, -1],
+    ];
+
+    const colorShortestPath = (currX, currY) => {
+      while (currX != -1 && currY != -1) {
+        currPath.push(grid[currX][currY]);
+        let cords = distanceArray[currX][currY].parentIndex;
+        currX = cords[0];
+        currY = cords[1];
+      }
+
+      currPath.reverse();
+
+      currPath.map((tile, index) => {
+        setTimeout(() => {
+          tile.setIsInPath(() => true);
+        }, index * 100);
+      });
+    };
+
+    const findSmallestDist = () => {
+      let cords = null;
+      let smallestDist = Infinity;
+
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
+          let newDist = distanceArray[i][j].distance;
+
+          if (!isVisited[i][j] && smallestDist > newDist) {
+            cords = [i, j];
+            smallestDist = newDist;
+          }
+        }
+      }
+
+      return cords;
+    };
+
+    while (1) {
+      isVisited[currX][currY] = true;
+
+      const tempX = currX;
+      const tempY = currY;
+
+      if (grid[currX][currY].isTarget) {
+        setTimeout(() => {
+          grid[tempX][tempY].setIsExplored(() => true);
+          colorShortestPath(currX, currY);
+        }, 500 + counter * 200);
+
+        break;
+      }
+
+      setTimeout(() => {
+        grid[tempX][tempY].setIsExplored(() => true);
+      }, 500 + counter * 200);
+
+      counter++;
+
+      for (let i = 0; i < 4; i++) {
+        let newX = currX + moves[i][0];
+        let newY = currY + moves[i][1];
+
+        if (
+          isValidMove(newX, newY) &&
+          !grid[newX][newY].isObstruction &&
+          !isVisited[newX][newY]
+        ) {
+          let cost = 1;
+          if (grid[newX][newY].isBomb) {
+            cost += 5;
+          }
+
+          let oldCost = distanceArray[newX][newY].distance;
+          let newCost = distanceArray[currX][currY].distance + cost;
+
+          if (newCost < oldCost) {
+            distanceArray[newX][newY].distance = newCost;
+            distanceArray[newX][newY].parentIndex = [currX, currY];
+          }
+        }
+      }
+
+      let cords = findSmallestDist();
+      currX = cords[0];
+      currY = cords[1];
+    }
+
+    console.log("The End", currX, currY, counter);
+  };
+
+  const currPath = [];
+  const x = source.row;
+  const y = source.column;
+
+  runDijkstra(currPath, x, y);
 };

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bomb - Quick Practice
+* source:	https://sketchfab.com/3d-models/bomb-quick-practice-1631526a79b44d3a96382b1802a59fb7
+* author:	Jason Rumpff (https://sketchfab.com/jrumpff)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bomb - Quick Practice" (https://sketchfab.com/3d-models/bomb-quick-practice-1631526a79b44d3a96382b1802a59fb7) by Jason Rumpff (https://sketchfab.com/jrumpff) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

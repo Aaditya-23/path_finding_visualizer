@@ -8,9 +8,9 @@ body {
   background-color: black;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .App {
   user-select: none;

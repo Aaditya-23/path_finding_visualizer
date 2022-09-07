@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 
-export default function Model() {
-  const { nodes, materials } = useGLTF("./Models_3d/scene.gltf");
+export function Pillar() {
+  const { nodes, materials } = useGLTF("./Models_3d/Pillar/scene.gltf");
 
   return (
     <group
@@ -13,6 +13,18 @@ export default function Model() {
       <mesh
         geometry={nodes.Object_2.geometry}
         material={materials.lambert2SG}
+      />
+    </group>
+  );
+}
+
+export function Bomb() {
+  const { nodes, materials } = useGLTF("./Models_3d/Bomb/scene.gltf");
+  return (
+    <group rotation={[-Math.PI / 2, 0, 0]} dispose={null} scale={0.007}>
+      <mesh
+        geometry={nodes.Object_2.geometry}
+        material={materials.material_0}
       />
     </group>
   );

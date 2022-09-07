@@ -2,14 +2,15 @@ import { useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import { DoubleSide } from "three";
 import { motion } from "framer-motion-3d";
-import Model from "./Model";
+import { Pillar, Bomb } from "./Model";
 
 function Tiles({ props }) {
-  const { isMouseDown, position, color, index } = props;
+  const { isMouseDown, model, position, color, index } = props;
 
   const [tileColor, setTileColor] = useState(color);
   const [isHovered, setIsHovered] = useState(false);
   const [isObstruction, setIsObstruction] = useState(false);
+  const [isBomb, setIsBomb] = useState(false);
   const [isTarget, setIsTarget] = useState(false);
   const [isSource, setIsSource] = useState(false);
   const [isExplored, setIsExplored] = useState(false);
@@ -56,9 +57,24 @@ function Tiles({ props }) {
 
   return (
     <>
-      <mesh position={position}>
-        <Suspense fallback={null}>{isObstruction && <Model />}</Suspense>
-      </mesh>
+      {/* <mesh position={[position[0], 0.6, position[2]]}>
+        <Suspense fallback={null}>
+          {isObstruction && <Pillar />}
+          {isBomb && <Bomb />}
+        </Suspense>
+      </mesh> */}
+
+      {isObstruction && (
+        <mesh position={[position[0], 0, position[2]]}>
+          <Suspense fallback={null}>{isObstruction && <Pillar />}</Suspense>
+        </mesh>
+      )}
+
+      {isBomb && (
+        <mesh position={[position[0], 0.45, position[2]]}>
+          <Suspense fallback={null}>{isBomb && <Bomb />}</Suspense>
+        </mesh>
+      )}
 
       {!isSource && (
         <motion.mesh
@@ -81,6 +97,7 @@ function Tiles({ props }) {
         scale={isExplored ? 0.9 : 1}
         customProps={{
           isObstruction,
+          isBomb,
           index,
           isSource,
           isTarget,
@@ -88,6 +105,7 @@ function Tiles({ props }) {
           isInPath,
           setTileColor,
           setIsObstruction,
+          setIsBomb,
           setIsTarget,
           setIsSource,
           setIsExplored,
@@ -98,7 +116,10 @@ function Tiles({ props }) {
         position={position}
         onPointerEnter={(e) => {
           if (isMouseDown) {
-            setIsObstruction((prevState) => !prevState);
+            if (isObstruction) setIsObstruction(() => false);
+            else if (isBomb) setIsBomb(() => false);
+            else if (model === "pillar") setIsObstruction(() => true);
+            else if (model === "bomb") setIsBomb(() => true);
           } else {
             setIsHovered(true);
           }
@@ -122,15 +143,16 @@ function Tiles({ props }) {
 
 export default function Grid({ props }) {
   const {
+    isSelectingSource,
+    isSelectingTarget,
+    model,
     gridDimensions: { rows, columns },
     generateGrid,
     isMouseDown,
+    setIsSelectingSource,
+    setIsSelectingTarget,
     setMouseDown,
     setScene,
-    isSelectingSource,
-    setIsSelectingSource,
-    isSelectingTarget,
-    setIsSelectingTarget,
   } = props;
 
   const { scene } = useThree();
@@ -159,17 +181,18 @@ export default function Grid({ props }) {
         if (object.name === "tile") {
           const {
             customProps: {
-              index,
               isObstruction,
+              isBomb,
               setIsObstruction,
+              setIsBomb,
               isSource,
               setIsSource,
               isTarget,
               setIsTarget,
             },
           } = object;
-          
-          if (!isObstruction) {
+
+          if (!isObstruction && !isBomb) {
             if (isSelectingSource && !isTarget) {
               prevSource(() => false);
               setPrevSource(() => setIsSource);
@@ -185,7 +208,12 @@ export default function Grid({ props }) {
             }
           }
 
-          setIsObstruction((prevState) => !prevState);
+          if (isSource || isTarget) return;
+
+          if (isObstruction) setIsObstruction(() => false);
+          else if (isBomb) setIsBomb(() => false);
+          else if (model === "pillar") setIsObstruction(() => true);
+          else if (model === "bomb") setIsBomb(() => true);
         }
       }}
     >
@@ -203,6 +231,7 @@ export default function Grid({ props }) {
               key={indx}
               props={{
                 isMouseDown,
+                model,
                 position,
                 color,
                 index,
