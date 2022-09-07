@@ -57,13 +57,6 @@ function Tiles({ props }) {
 
   return (
     <>
-      {/* <mesh position={[position[0], 0.6, position[2]]}>
-        <Suspense fallback={null}>
-          {isObstruction && <Pillar />}
-          {isBomb && <Bomb />}
-        </Suspense>
-      </mesh> */}
-
       {isObstruction && (
         <mesh position={[position[0], 0, position[2]]}>
           <Suspense fallback={null}>{isObstruction && <Pillar />}</Suspense>
@@ -79,7 +72,7 @@ function Tiles({ props }) {
       {!isSource && (
         <motion.mesh
           rotation={[-Math.PI / 2, 0, 0]}
-          position={[position[0], 0.01, position[2]]}
+          position={[position[0], 0.05, position[2]]}
           variants={pathMesh}
           initial="initial"
           animate={isExplored ? "active" : "hidden"}
@@ -174,7 +167,6 @@ export default function Grid({ props }) {
     <group
       name="grid"
       onPointerDown={(e) => {
-        // e.stopPropagation();
         setMouseDown(true);
 
         const { object } = e;
@@ -217,7 +209,7 @@ export default function Grid({ props }) {
         }
       }}
     >
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} name="base">
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} name="base">
         <boxGeometry args={[rows * 2.1 + 1, columns * 2.1 + 1, 1.5]} />
         <meshBasicMaterial color="#2E86C1" side={DoubleSide} />
       </mesh>

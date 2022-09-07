@@ -4,6 +4,7 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import Grid from "./Grid";
 import DialogBox from "../DialogBox/DialogBox";
 import "./Styles.css";
+import { useEffect } from "react";
 
 export default function Visualizer({ props }) {
   const [isSelectingSource, setIsSelectingSource] = useState(false);
@@ -15,7 +16,7 @@ export default function Visualizer({ props }) {
     columns: 20,
     dropdown: 0,
   });
-  const [visualizingSpeed, setVisualizingSpeed] = useState("fast");
+  const [visualizingSpeed, setVisualizingSpeed] = useState(10);
 
   const [isMouseDown, setMouseDown] = useState(false);
 
@@ -28,10 +29,13 @@ export default function Visualizer({ props }) {
       .map(() => Array(columns).fill(null));
     const color = "#1F618D";
 
+    const extraRow = (rows / 10 - 2) / 2;
+    const extraCol = (columns / 10 - 2) / 2;
+
     let x, y, z;
-    x = rows;
+    x = rows + extraRow;
     y = 0;
-    z = columns;
+    z = columns + extraCol;
 
     for (let i = 1; i <= rows; i++) {
       for (let j = 1; j <= columns; j++) {
@@ -42,12 +46,16 @@ export default function Visualizer({ props }) {
         };
         x -= 2.1;
       }
-      x = rows;
+      x = rows + extraRow;
       z -= 2.1;
     }
 
     return virtualGrid;
   };
+
+  // useEffect(() => {
+  //   console.log(currentAlgorithm);
+  // }, [currentAlgorithm]);
 
   return (
     <div

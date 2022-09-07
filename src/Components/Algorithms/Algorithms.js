@@ -1,25 +1,52 @@
 import { Queue } from "./DataStructures";
 
-const grid = Array(20)
-  .fill()
-  .map(() => Array(20).fill(null));
+let grid = null;
 
-const isVisited = Array(20)
-  .fill()
-  .map(() => Array(20).fill(false));
+let isVisited = null;
 
 let source = { row: null, column: null };
 
-const resetIsVisited = () => {
-  isVisited.forEach((subarray, i) => {
-    subarray.forEach((item, j) => (isVisited[i][j] = false));
+const ResetIsVisited = (gridDimensions) => {
+  isVisited = Array(gridDimensions.rows)
+    .fill()
+    .map(() => Array(gridDimensions.columns).fill(false));
+};
+
+const StartNodeNotFound = (setToastInfo) => {
+  setToastInfo(() => {
+    return { isOpen: true, type: "error", message: "no starting node found" };
   });
 };
 
-export const generateVirtualGrid = (scene) => {
+const PathFound = (setToastInfo) => {
+  setToastInfo(() => {
+    return {
+      isOpen: true,
+      type: "success",
+      message: "path founded successfully",
+    };
+  });
+};
+
+const PathNotFound = (setToastInfo) => {
+  setToastInfo(() => {
+    return { isOpen: true, type: "error", message: "unable to find the path" };
+  });
+};
+
+const IsValidMove = (newX, newY) => {
+  return newX > -1 && newX < grid.length && newY > -1 && newY < grid[0].length;
+};
+
+export const GenerateVirtualGrid = (scene, gridDimensions) => {
+  grid = Array(gridDimensions.rows)
+    .fill()
+    .map(() => Array(gridDimensions.columns).fill(null));
+
   const { children } = scene.children.filter(
     (child) => child.name === "grid"
   )[0];
+
   children.forEach((mesh) => {
     const { name } = mesh;
 
@@ -59,12 +86,16 @@ export const generateVirtualGrid = (scene) => {
         setIsSource,
       };
 
-      if (isSource) source = { row, column };
+      if (isSource) {
+        source = { row, column };
+      }
     }
   });
 };
 
-export const clearGrid = (parameter) => {
+export const ClearGrid = (parameter) => {
+  if (!grid) return;
+
   const row = grid.length;
   const column = grid[0].length;
 
@@ -92,20 +123,55 @@ export const clearGrid = (parameter) => {
   }
 };
 
-const isValidMove = (newX, newY) => {
-  return newX > -1 && newX < 20 && newY > -1 && newY < 20;
+export const GenerateMaze = {
+  randomMaze: (scene, gridDimensions, speed, setToastInfo) => {
+    ClearGrid(true);
+    ResetIsVisited(gridDimensions);
+    GenerateVirtualGrid(scene, gridDimensions);
+
+    const rows = grid.length;
+    const columns = grid[0].length;
+    let counter = 0;
+
+    const add = (x, y) => {
+      const temp = counter;
+      setTimeout(() => {
+        grid[x][y].setIsObstruction(() => true);
+      }, temp * 100);
+      counter++;
+    };
+
+    const topLeftBlock = () => {
+      const n = (rows * 30) / 100;
+      const m = (columns * 30) / 100;
+
+      for (let i = 0; i < n; i++) add(0, i);
+      for (let i = 1; i < m; i++) add(i, n - 1);
+      for (let i = 0; i < n - 1; i++) add(n - 1, i);
+    };
+
+    const topLeftOutline = () => {
+      
+    }
+
+    topLeftBlock();
+    console.log("random maze");
+  },
 };
 
-export const DFS = (scene) => {
-  clearGrid(false);
-  resetIsVisited();
-  generateVirtualGrid(scene);
+export const DFS = (scene, gridDimensions, speed, setToastInfo) => {
+  ClearGrid(false);
+  ResetIsVisited(gridDimensions);
+  GenerateVirtualGrid(scene, gridDimensions);
 
   let path = [];
+  let isFound = false;
 
   let counter = 0;
   const recurDFS = (currPath, x, y) => {
     if (grid[x][y].isTarget) {
+      isFound = true;
+
       setTimeout(() => {
         grid[x][y].setIsExplored(() => true);
         path.push(grid[x][y]);
@@ -113,19 +179,20 @@ export const DFS = (scene) => {
         path.map((tile, index) => {
           setTimeout(() => {
             tile.setIsInPath(() => true);
-          }, index * 100);
+          }, index * 50);
 
           return null;
         });
-      }, 500 + counter * 200);
+      }, 500 + counter * speed);
       return true;
     }
 
     isVisited[x][y] = true;
     currPath.push(grid[x][y]);
+
     setTimeout(() => {
       grid[x][y].setIsExplored(() => true);
-    }, 500 + counter * 200);
+    }, 500 + counter * speed);
 
     const moves = [
       [-1, 0],
@@ -139,7 +206,7 @@ export const DFS = (scene) => {
       let newY = y + moves[i][1];
 
       if (
-        isValidMove(newX, newY) &&
+        IsValidMove(newX, newY) &&
         !grid[newX][newY].isObstruction &&
         !isVisited[newX][newY]
       ) {
@@ -158,14 +225,30 @@ export const DFS = (scene) => {
   const currPath = [];
   let x = source.row;
   let y = source.column;
+
+  if (x === null || y === null) {
+    StartNodeNotFound(setToastInfo);
+    return;
+  }
+
   recurDFS(currPath, x, y);
+
+  if (isFound)
+    setTimeout(() => {
+      PathFound(setToastInfo);
+    }, 500 + counter * speed);
+  else
+    setTimeout(() => {
+      PathNotFound(setToastInfo);
+    }, 500 + counter * speed);
 };
 
-export const BFS = (scene) => {
-  clearGrid(false);
-  resetIsVisited();
-  generateVirtualGrid(scene);
+export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
+  ClearGrid(false);
+  ResetIsVisited(gridDimensions);
+  GenerateVirtualGrid(scene, gridDimensions);
 
+  let isFound = false;
   let counter = 0;
 
   const runBFS = (currPath, x, y) => {
@@ -192,11 +275,13 @@ export const BFS = (scene) => {
           let newY = front.index[1] + moves[j][1];
 
           if (
-            isValidMove(newX, newY) &&
+            IsValidMove(newX, newY) &&
             !isVisited[newX][newY] &&
             !grid[newX][newY].isObstruction
           ) {
             if (grid[newX][newY].isTarget) {
+              isFound = true;
+
               setTimeout(() => {
                 grid[newX][newY].setIsExplored(() => true);
                 front.path.push([newX, newY]);
@@ -206,9 +291,9 @@ export const BFS = (scene) => {
                     let col = tile[1];
 
                     grid[row][col].setIsInPath(() => true);
-                  }, index * 100);
+                  }, index * 50);
                 });
-              }, 500 + counter * 200);
+              }, 500 + counter * speed);
 
               return;
             }
@@ -221,7 +306,7 @@ export const BFS = (scene) => {
 
             setTimeout(() => {
               grid[newX][newY].setIsExplored(() => true);
-            }, 500 + counter * 200);
+            }, 500 + counter * speed);
 
             counter++;
           }
@@ -234,14 +319,29 @@ export const BFS = (scene) => {
   let x = source.row;
   let y = source.column;
 
+  if (x === null || y === null) {
+    StartNodeNotFound(setToastInfo);
+    return;
+  }
+
   runBFS(currPath, x, y);
+
+  if (isFound)
+    setTimeout(() => {
+      PathFound(setToastInfo);
+    }, 500 + counter * speed);
+  else
+    setTimeout(() => {
+      PathNotFound(setToastInfo);
+    }, 500 + counter * speed);
 };
 
-export const dijkstra = (scene) => {
-  clearGrid(false);
-  resetIsVisited();
-  generateVirtualGrid(scene);
+export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
+  ClearGrid(false);
+  ResetIsVisited(gridDimensions);
+  GenerateVirtualGrid(scene, gridDimensions);
 
+  let isFound = false;
   let counter = 0;
 
   const runDijkstra = (currPath, x, y) => {
@@ -284,12 +384,12 @@ export const dijkstra = (scene) => {
       currPath.map((tile, index) => {
         setTimeout(() => {
           tile.setIsInPath(() => true);
-        }, index * 100);
+        }, index * 50);
       });
     };
 
     const findSmallestDist = () => {
-      let cords = null;
+      let cords = [-1, -1];
       let smallestDist = Infinity;
 
       for (let i = 0; i < rows; i++) {
@@ -313,17 +413,19 @@ export const dijkstra = (scene) => {
       const tempY = currY;
 
       if (grid[currX][currY].isTarget) {
+        isFound = true;
+
         setTimeout(() => {
           grid[tempX][tempY].setIsExplored(() => true);
           colorShortestPath(currX, currY);
-        }, 500 + counter * 200);
+        }, 500 + counter * speed);
 
         break;
       }
 
       setTimeout(() => {
         grid[tempX][tempY].setIsExplored(() => true);
-      }, 500 + counter * 200);
+      }, 500 + counter * speed);
 
       counter++;
 
@@ -332,7 +434,7 @@ export const dijkstra = (scene) => {
         let newY = currY + moves[i][1];
 
         if (
-          isValidMove(newX, newY) &&
+          IsValidMove(newX, newY) &&
           !grid[newX][newY].isObstruction &&
           !isVisited[newX][newY]
         ) {
@@ -354,14 +456,28 @@ export const dijkstra = (scene) => {
       let cords = findSmallestDist();
       currX = cords[0];
       currY = cords[1];
-    }
 
-    console.log("The End", currX, currY, counter);
+      if (currX === -1 && currY === -1) return;
+    }
   };
 
   const currPath = [];
   const x = source.row;
   const y = source.column;
 
+  if (x === null || y === null) {
+    StartNodeNotFound(setToastInfo);
+    return;
+  }
+
   runDijkstra(currPath, x, y);
+
+  if (isFound)
+    setTimeout(() => {
+      PathFound(setToastInfo);
+    }, 500 + counter * speed);
+  else
+    setTimeout(() => {
+      PathNotFound(setToastInfo);
+    }, 500 + counter * speed);
 };
