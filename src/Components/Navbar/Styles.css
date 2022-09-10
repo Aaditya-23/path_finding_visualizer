@@ -1,10 +1,10 @@
 .navbar {
-  width: 100%;
-  box-sizing: border-box;
+  width: 80%;
+  margin: 1rem auto;
   padding: 1.5rem;
-  background-color: black;
+  box-sizing: border-box;
   color: white;
-  box-shadow: 0 0 10px 2px gray;
+  background-color: black;
 }
 
 .nav-list {
@@ -28,8 +28,10 @@
 .nav-heading {
   font-family: "DynaPuff", cursive;
   font-size: 2rem;
+  cursor: grabbing;
 }
 
 .nav-links {
   font-weight: 500;
+  color: #d0d0d0;
 }
