@@ -5,15 +5,12 @@ export default function Features() {
     {
       heading: "orbital controls",
       writeUp:
-        "Grid is set up in a 3-Dimensional world. You can use\
-         your mouse to rotate around the scene, ZOOM in and out. To PAN the scene press and\
-          hold the ctrl/cmd button and then press and hold the mouse and move the mouse to see the magic happen.",
+        "Grid is set up in a 3-Dimensional world. You can use your mouse to rotate around the scene, ZOOM in and out. To PAN the scene press and hold the ctrl/cmd button and then press and hold the mouse and move the mouse to see the magic happen.",
     },
     {
       heading: "Custom Maze Generator",
       writeUp:
-        "Generating maze patterns again and again can be exhaustive even if its not,\
-         We've got some custom super-interesting maze patterns. Head over to maze generator dropdown menu and select your maze pattern and VISUALIZE!",
+        "Generating maze patterns again and again can be exhaustive even if its not, We've got some custom super-interesting maze patterns. Head over to maze generator dropdown menu and select your maze pattern and VISUALIZE!",
     },
 
     {
@@ -25,15 +22,12 @@ export default function Features() {
     {
       heading: "Mesh Animations",
       writeUp:
-        "Clean mesh animations to visualize the whole process in a correct way.\
-         You can control the speed of the whole process by selecting the speed from the speed dropdown menu.",
+        "Clean mesh animations to visualize the whole process in a correct way. You can control the speed of the whole process by selecting the speed from the speed dropdown menu.",
     },
-
     {
       heading: "more algorithms to visualize",
       writeUp:
-        "We have a descent collection of algorithms to visualize. And a whole lot of algorithms would\
-         be added in the future. To read about the algorithms that we currently have ",
+        "We have a descent collection of algorithms to visualize. And a whole lot of algorithms would be added in the future. To read about the algorithms that we currently have ",
     },
   ];
 

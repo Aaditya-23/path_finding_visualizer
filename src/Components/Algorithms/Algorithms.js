@@ -118,6 +118,8 @@ export const ClearGrid = (parameter) => {
         setIsBomb(() => false);
         setIsSource(() => false);
         setIsTarget(() => false);
+        source.row = null;
+        source.column = null;
       }
     }
   }
@@ -194,7 +196,6 @@ export const GenerateMaze = {
     topRightBlock();
     topLeftOutline();
     bottomLine();
-    console.log("random maze");
   },
 };
 
@@ -336,6 +337,7 @@ export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
 
                     grid[row][col].setIsInPath(() => true);
                   }, index * 50);
+                  return null;
                 });
               }, 500 + counter * speed);
 
@@ -416,7 +418,7 @@ export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
     ];
 
     const colorShortestPath = (currX, currY) => {
-      while (currX != -1 && currY != -1) {
+      while (currX !== -1 && currY !== -1) {
         currPath.push(grid[currX][currY]);
         let cords = distanceArray[currX][currY].parentIndex;
         currX = cords[0];
@@ -429,6 +431,7 @@ export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
         setTimeout(() => {
           tile.setIsInPath(() => true);
         }, index * 50);
+        return null;
       });
     };
 

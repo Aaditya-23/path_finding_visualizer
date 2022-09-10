@@ -9,11 +9,10 @@ import {
   GenerateVirtualGrid,
 } from "../Algorithms/Algorithms";
 import Toasts from "../Custom/Toasts/Toasts";
-import "./Styles.css";
 import { Home, Info } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import Tooltip from "../Custom/Tooltip/Tooltip";
 import { HashLink } from "react-router-hash-link";
+import "./Styles.css";
 
 export default function DialogBox({ props }) {
   const {
@@ -33,8 +32,9 @@ export default function DialogBox({ props }) {
   } = props;
 
   useEffect(() => {
-    if (scene) GenerateVirtualGrid(scene, gridDimensions);
-  }, [scene]);
+    if (scene && scene.children.length > 0)
+      GenerateVirtualGrid(scene, gridDimensions);
+  }, [scene, gridDimensions]);
 
   const [toastInfo, setToastInfo] = useState({
     isOpen: false,
@@ -176,8 +176,8 @@ export default function DialogBox({ props }) {
             setVisualizingSpeed(() => e.target.value);
           }}
         >
-          <option value={10}>fast</option>
-          <option value={50}>medium</option>
+          <option value={20}>fast</option>
+          <option value={60}>medium</option>
           <option value={90}>slow</option>
         </select>
 
@@ -192,6 +192,8 @@ export default function DialogBox({ props }) {
                   visualizingSpeed,
                   setToastInfo
                 );
+                break;
+              default:
                 break;
             }
           }}

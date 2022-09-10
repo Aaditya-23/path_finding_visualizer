@@ -15,47 +15,6 @@ main {
   line-height: 2cm;
 }
 
-/* .tech-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.tech-heading {
-  font-size: 4vw;
-}
-
-.section {
-  width: 100vw;
-  padding: 1rem;
-  box-sizing: border-box;
-  background-color: #1C2833;
-  display: flex;
-  justify-content: space-between;
-}
-
-.tech-container {
-  min-height: 100%;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-}
-
-.tech-info img {
-  width: 1.5in;
-  height: 1.5in;
-}
-
-.tech-name {
-  font-size: 2rem;
-  text-align: center;
-  color: #d0d0d0;
-} */
-
 .features {
   display: flex;
   flex-direction: column;
@@ -98,58 +57,19 @@ main {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  /* background-color: red; */
 }
-
-/* .card {
-  width: 35%;
-  height: 2.5in;
-  padding: 1rem;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  border-radius: 1.5rem;
-  background-color: #212f3c;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-title {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-info {
-  padding: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  border: 2px solid royalblue;
-}
-
-.card-heading {
-  font-size: 1.8rem;
-}
-
-.card-divider {
-  width: 100%;
-  height: 1px;
-  margin: 1rem 0;
-  background-color: grey;
-  border-radius: 2px;
-} */
 
 .device-view {
   margin: auto;
   width: 60vw;
   height: 80vh;
+  min-width: 8in;
+  min-height: 5in;
   padding: 1.2rem;
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
   border-radius: 2rem;
   background-color: black;
-  /* border: 0.1px solid whitesmoke; */
-  /* box-shadow: -5px -3px 2px 0px grey, 2px -2px 0 0 grey, -1px 2px 0px 1px grey; */
   box-shadow: 0 0 5px 0 grey;
 }
 
@@ -159,7 +79,6 @@ main {
   border-radius: 0.9rem;
   display: flex;
   background-color: hsl(0, 5%, 7%);
-  /* background-color: hsl(200, 18%, 26%); */
 }
 
 .drawer {
@@ -260,12 +179,11 @@ main {
 
 .content-heading {
   font-size: 2rem;
-  color: #9FA8DA;
+  color: #9fa8da;
   text-transform: uppercase;
 }
 
 .content-description {
-  /* text-transform: capitalize; */
   font-size: 0.9rem;
   word-spacing: 0.3rem;
   line-height: 1.7rem;
@@ -293,10 +211,4 @@ main {
 
 .bump-fontSize {
   font-size: 3rem;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: pink;
 }

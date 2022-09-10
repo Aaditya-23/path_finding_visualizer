@@ -4,7 +4,7 @@ import Home from "./Home/Home";
 import Features from "./Home/Features";
 import HowTo from "./Home/HowTo";
 import Algorithms from "./Home/Algorithms";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [scene, setScene] = useState(null);

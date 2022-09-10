@@ -1,9 +1,6 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { DoubleSide } from "three";
-
-import { Pillar, Bomb } from "../Visualizer/Model";
 
 const rows = 20;
 const columns = 20;
@@ -48,9 +45,6 @@ function Grid() {
         <meshBasicMaterial color={"#2E86C1"} />
       </mesh>
       <group>{GenerateTiles()}</group>
-      <group scale={2} position={[1, 0, 1.25]}>
-        <Pillar />
-      </group>
     </group>
   );
 }
@@ -58,7 +52,6 @@ function Grid() {
 export default function RotatingHomeGrid() {
   return (
     <Canvas camera={{ position: [0, 30, -40] }}>
-      <ambientLight intensity={1} />
       <Grid />
     </Canvas>
   );

@@ -15,7 +15,7 @@ export default function Visualizer({ props }) {
     columns: 20,
     dropdown: 0,
   });
-  const [visualizingSpeed, setVisualizingSpeed] = useState(10);
+  const [visualizingSpeed, setVisualizingSpeed] = useState(20);
 
   const [isMouseDown, setMouseDown] = useState(false);
 
@@ -56,10 +56,13 @@ export default function Visualizer({ props }) {
     <div
       className="visualizer"
       onMouseLeave={() => {
-        setMouseDown(false);
+        setMouseDown(() => false);
       }}
       onMouseUp={() => {
-        setMouseDown(false);
+        setMouseDown(() => false);
+      }}
+      onTouchEnd={() => {
+        setMouseDown(() => false);
       }}
     >
       <DialogBox

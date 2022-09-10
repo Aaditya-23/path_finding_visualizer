@@ -5,7 +5,6 @@
   box-sizing: border-box;
   color: white;
   background-color: black;
-  /* box-shadow: 0 0 5px 1px gray; */
 }
 
 .nav-list {
@@ -29,7 +28,7 @@
 .nav-heading {
   font-family: "DynaPuff", cursive;
   font-size: 2rem;
-  /* color: #fecc1b; */
+  cursor: grabbing;
 }
 
 .nav-links {

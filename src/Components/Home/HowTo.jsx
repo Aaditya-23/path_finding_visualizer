@@ -3,10 +3,7 @@ export default function HowTo() {
     {
       heading: "Walkthrough",
       writeUp:
-        'Let\'s start with the starting and ending nodes. To select a starting point, click\
-         on the "select source button" and then click on the node that you wish to\
-          have it as a starting node.\
-          Do the same to select the target node by clicking on the "select target button".',
+        'Let\'s start with the starting and ending nodes. To select a starting point, click on the "select source button" and then click on the node that you wish to have it as a starting node. Do the same to select the target node by clicking on the "select target button".',
     },
     {
       heading: "select an algorithm",
@@ -17,18 +14,13 @@ export default function HowTo() {
     {
       heading: "Model",
       writeUp:
-        "Choose what object do you want to drop on the node. A\
-         Pillar would restrict the path and would not allow us to pass through it. On the other hand, a Bomb would cost more\
-         to pass through it but it does not restrict the path and allows us to pass through it.",
+        "Choose what object do you want to drop on the node. A Pillar would restrict the path and would not allow us to pass through it. On the other hand, a Bomb would cost more to pass through it but it does not restrict the path and allows us to pass through it.",
     },
 
     {
       heading: "clear grid",
       writeUp:
-        'To clear the current path from the source node to the target node, click on the "clear path" button. This will\
-       not erase the source node and target node and neither will this remove any Pillar or Bomb on the grid.\
-        Click on the "clear everything" button to remove the Pillars and Bombs from the grid.\
-         This will also remove the source and target nodes. ',
+        'To clear the current path from the source node to the target node, click on the "clear path" button. This will not erase the source node and target node and neither will this remove any Pillar or Bomb on the grid Click on the "clear everything" button to remove the Pillars and Bombs from the grid This will also remove the source and target nodes. ',
     },
   ];
 

@@ -48,10 +48,11 @@ export default function DeviceView() {
           animate={isOpen ? "open" : "closed"}
           variants={variants}
         >
-          <div className="drawer-logo">
-            <span tabIndex="0" onClick={closeDrawer}>
-              <ArrowBackIosNewRounded />
-            </span>
+          <div tabIndex={0} className="drawer-logo">
+            <ArrowBackIosNewRounded
+              sx={{ cursor: "pointer" }}
+              onClick={closeDrawer}
+            />
           </div>
 
           <ul className="drawerList">
@@ -78,9 +79,12 @@ export default function DeviceView() {
         </motion.div>
 
         <div className="screen-layout">
-          <span style={{}} onClick={openDrawer}>
-            {!isOpen && <AutoAwesomeMosaic />}
-          </span>
+          {!isOpen && (
+            <AutoAwesomeMosaic
+              sx={{ cursor: "pointer" }}
+              onClick={openDrawer}
+            />
+          )}
           <div className="screen-content">
             <Outlet />
           </div>

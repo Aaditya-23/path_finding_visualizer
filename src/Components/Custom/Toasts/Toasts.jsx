@@ -3,7 +3,7 @@ import { CheckCircle, Error, Info } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import "./Styles.css";
 
-export default function ({ props }) {
+export default function Toasts({ props }) {
   const {
     toastInfo,
     toastInfo: { type },
@@ -31,7 +31,7 @@ export default function ({ props }) {
         clearTimeout(removeToast);
       };
     }
-  }, [toastInfo]);
+  }, [toastInfo, setToastInfo]);
 
   return (
     <motion.div
