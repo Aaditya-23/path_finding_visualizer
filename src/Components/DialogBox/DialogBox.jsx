@@ -6,9 +6,14 @@ import {
   Dijkstra,
   ClearGrid,
   GenerateMaze,
+  GenerateVirtualGrid,
 } from "../Algorithms/Algorithms";
-import "./Styles.css";
 import Toasts from "../Custom/Toasts/Toasts";
+import "./Styles.css";
+import { Home, Info } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import Tooltip from "../Custom/Tooltip/Tooltip";
+import { HashLink } from "react-router-hash-link";
 
 export default function DialogBox({ props }) {
   const {
@@ -28,21 +33,8 @@ export default function DialogBox({ props }) {
   } = props;
 
   useEffect(() => {
-    const pressEscape = (e) => {
-      const isSelect = [
-        ...document.querySelectorAll(".custom-selectWrapper"),
-      ].includes(document.activeElement);
-
-      if (e.key === "Escape" && isSelect) {
-        document.activeElement.blur();
-      }
-    };
-
-    window.addEventListener("keydown", pressEscape);
-    return () => {
-      window.removeEventListener("keydown", pressEscape);
-    };
-  }, []);
+    if (scene) GenerateVirtualGrid(scene, gridDimensions);
+  }, [scene]);
 
   const [toastInfo, setToastInfo] = useState({
     isOpen: false,
@@ -204,10 +196,11 @@ export default function DialogBox({ props }) {
             }
           }}
         >
-          <option disabled value="default">
-            choose maze pattern
-          </option>
+          <option value="default">choose maze pattern</option>
           <option value="randomMaze">random maze</option>
+          <option value="" disabled>
+            More Patterns coming soon
+          </option>
         </select>
 
         <div
@@ -234,6 +227,35 @@ export default function DialogBox({ props }) {
               styles: { backgroundColor: "#C2185B" },
             }}
           />
+        </div>
+
+        <div className="bttn-container">
+          <Link
+            style={{
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            data-content="Return home"
+            className="tooltip"
+            to="/"
+          >
+            <Home />
+          </Link>
+
+          <HashLink
+            scroll={(el) => {
+              el.scrollIntoView({ behavior: "smooth" });
+            }}
+            style={{
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            data-content="Click here to read the guide."
+            className="tooltip"
+            to="/#guide"
+          >
+            <Info />
+          </HashLink>
         </div>
       </div>
 

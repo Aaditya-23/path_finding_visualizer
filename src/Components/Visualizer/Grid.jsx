@@ -55,21 +55,43 @@ function Tiles({ props }) {
     },
   };
 
+  const modelLoad = {
+    initial: {
+      scale: 0,
+    },
+    activePillar: {
+      scale: 1,
+    },
+    activeBomb: {
+      scale: 1,
+    },
+  };
+
   return (
     <>
       {isObstruction && (
-        <mesh position={[position[0], 0, position[2]]}>
+        <motion.mesh
+          variants={modelLoad}
+          initial="initial"
+          animate="activePillar"
+          position={position}
+        >
           <Suspense fallback={null}>{isObstruction && <Pillar />}</Suspense>
-        </mesh>
+        </motion.mesh>
       )}
 
       {isBomb && (
-        <mesh position={[position[0], 0.45, position[2]]}>
+        <motion.mesh
+          variants={modelLoad}
+          initial="initial"
+          animate="activeBomb"
+          position={[position[0], 0.45, position[2]]}
+        >
           <Suspense fallback={null}>{isBomb && <Bomb />}</Suspense>
-        </mesh>
+        </motion.mesh>
       )}
 
-      {!isSource && (
+      {
         <motion.mesh
           rotation={[-Math.PI / 2, 0, 0]}
           position={[position[0], 0.05, position[2]]}
@@ -84,7 +106,7 @@ function Tiles({ props }) {
             side={DoubleSide}
           />
         </motion.mesh>
-      )}
+      }
 
       <mesh
         scale={isExplored ? 0.9 : 1}

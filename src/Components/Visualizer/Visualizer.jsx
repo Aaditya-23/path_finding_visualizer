@@ -4,7 +4,6 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import Grid from "./Grid";
 import DialogBox from "../DialogBox/DialogBox";
 import "./Styles.css";
-import { useEffect } from "react";
 
 export default function Visualizer({ props }) {
   const [isSelectingSource, setIsSelectingSource] = useState(false);
@@ -53,10 +52,6 @@ export default function Visualizer({ props }) {
     return virtualGrid;
   };
 
-  // useEffect(() => {
-  //   console.log(currentAlgorithm);
-  // }, [currentAlgorithm]);
-
   return (
     <div
       className="visualizer"
@@ -98,6 +93,7 @@ export default function Visualizer({ props }) {
         />
         <ambientLight intensity={2} />
         <spotLight position={[10, 1, 5]} angle={0.5} castShadow />
+
         <Grid
           props={{
             isSelectingSource,

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import "./Styles.css";
 
 export default function Navbar() {
@@ -14,7 +15,15 @@ export default function Navbar() {
             <Link to="/visualizer">visualiser</Link>
           </li>
           <li className="nav-links">
-            <Link to="/">algorithms</Link>
+            <HashLink
+              smooth
+              scroll={(el) => {
+                el.scrollIntoView({ behavior: "smooth" });
+              }}
+              to="#guide"
+            >
+              algorithms
+            </HashLink>
           </li>
         </ul>
       </ul>

@@ -25,3 +25,9 @@
 .dialog-actions select:focus {
   outline: none;
 }
+
+.bttn-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

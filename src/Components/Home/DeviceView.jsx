@@ -35,6 +35,7 @@ export default function DeviceView() {
 
   return (
     <motion.div
+      id="guide"
       ref={ref}
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
@@ -67,9 +68,9 @@ export default function DeviceView() {
             </li>
           </ul>
           <div className="profiles">
-            <Link to="/">
+            <a href="https://www.linkedin.com/in/aaditya-verma-523069224/">
               <LinkedIn />
-            </Link>
+            </a>
             <Link to="/">
               <GitHub />
             </Link>
@@ -77,7 +78,7 @@ export default function DeviceView() {
         </motion.div>
 
         <div className="screen-layout">
-          <span style={{ padding: "0.5rem" }} onClick={openDrawer}>
+          <span style={{}} onClick={openDrawer}>
             {!isOpen && <AutoAwesomeMosaic />}
           </span>
           <div className="screen-content">

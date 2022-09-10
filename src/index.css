@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+:root {
+  --bgcolor: #515a5a;
+}
+
 html {
   overflow-x: hidden;
 }
@@ -24,4 +28,44 @@ body {
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+.tooltip {
+  position: relative;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  --scale: 1;
+}
+
+.tooltip::before,
+.tooltip::after {
+  --scale: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transition: 0.2s ease-in;
+}
+
+.tooltip::before {
+  content: "";
+  z-index: 3;
+  border: 10px solid transparent;
+  border-bottom-color: var(--bgcolor);
+  transform: translateY(100%) translateX(-50%) scale(var(--scale));
+
+  transform-origin: bottom center;
+}
+
+.tooltip::after {
+  content: attr(data-content);
+  width: max-content;
+  padding: 0.2rem;
+  background-color: var(--bgcolor);
+  border-radius: 0.2rem;
+  transform: translateY(calc(100% + 20px)) translateX(-50%) scale(var(--scale));
+  transform-origin: top center;
 }

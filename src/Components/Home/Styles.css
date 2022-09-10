@@ -160,7 +160,6 @@ main {
   display: flex;
   background-color: hsl(0, 5%, 7%);
   /* background-color: hsl(200, 18%, 26%); */
-  overflow: hidden;
 }
 
 .drawer {
@@ -193,9 +192,14 @@ main {
 
 .list-element {
   min-width: fit-content;
-  padding: 1.5rem 0.5rem;
   transform: scale(1) translateX(0);
   transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.list-element a {
+  width: 100%;
+  display: inline-block;
+  padding: 1.5rem 0.5rem;
 }
 
 .list-element:hover {
@@ -218,15 +222,28 @@ main {
 .screen-layout {
   width: 100%;
   height: 100%;
+  padding: 0.5rem;
+  padding-right: 0;
   box-sizing: border-box;
   color: white;
-  /* background-color: royalblue; */
   display: flex;
   gap: 1rem;
 }
 
 .screen-content {
   padding-right: 0.5rem;
+  overflow-y: auto;
+}
+
+.screen-content::-webkit-scrollbar {
+  width: 5px;
+  background-color: gray;
+  border-radius: 1rem;
+}
+
+.screen-content::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: whitesmoke;
 }
 
 .content-wrapper {
@@ -243,11 +260,15 @@ main {
 
 .content-heading {
   font-size: 2rem;
+  color: #9FA8DA;
   text-transform: uppercase;
 }
 
 .content-description {
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
+  font-size: 0.9rem;
+  word-spacing: 0.3rem;
+  line-height: 1.7rem;
 }
 
 .rotatingGrid {

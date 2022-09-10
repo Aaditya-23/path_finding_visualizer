@@ -23,7 +23,7 @@ const PathFound = (setToastInfo) => {
     return {
       isOpen: true,
       type: "success",
-      message: "path founded successfully",
+      message: "path found",
     };
   });
 };
@@ -141,20 +141,59 @@ export const GenerateMaze = {
       counter++;
     };
 
-    const topLeftBlock = () => {
-      const n = (rows * 30) / 100;
-      const m = (columns * 30) / 100;
+    let n;
+    let m;
 
-      for (let i = 0; i < n; i++) add(0, i);
-      for (let i = 1; i < m; i++) add(i, n - 1);
-      for (let i = 0; i < n - 1; i++) add(n - 1, i);
+    const topLeftBlock = () => {
+      n = (rows * 30) / 100;
+      m = (columns * 30) / 100;
+
+      for (let i = 1; i < n; i++) add(i, m - 1);
+      for (let i = 0; i < m; i++) add(0, i);
+      for (let i = 0; i < m - 2; i++) add(n - 1, i);
     };
 
     const topLeftOutline = () => {
-      
-    }
+      n += -1 + (rows * 15) / 100;
+      m += -1 + (columns * 10) / 100;
+
+      for (let i = 0; i < n; i++) add(m, i);
+      for (let i = 1; i <= m; i++) add(i, n);
+    };
+
+    const bottomLine = () => {
+      const prevN = n;
+      n += -1 + (rows * 25) / 100;
+      m += -1 + (columns * 30) / 100;
+
+      for (let i = 0; i < m; i++) add(n, i);
+      for (let i = n; i >= prevN; i--) add(i, m);
+
+      let newM = m + (columns * 15) / 100;
+      for (let i = m + 1; i <= newM; i++) add(prevN, i);
+
+      let rowLimit = rows - (rows * 10) / 100;
+
+      for (let i = prevN + 1; i <= rowLimit; i++) add(i, newM);
+
+      let temp = newM;
+      newM += (columns * 10) / 100;
+
+      for (let i = temp; i <= newM; i++) add(rowLimit, i);
+    };
+
+    const topRightBlock = () => {
+      const n = (rows * 25) / 100;
+      const m = columns - (columns * 30) / 100;
+
+      for (let i = 0; i < n; i++) add(i, m);
+      for (let i = m + 1; i < columns; i++) add(n - 1, i);
+    };
 
     topLeftBlock();
+    topRightBlock();
+    topLeftOutline();
+    bottomLine();
     console.log("random maze");
   },
 };
@@ -255,6 +294,11 @@ export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
     const q = new Queue();
     q.enqueue({ index: [x, y], path: [[x, y]] });
     isVisited[x][y] = true;
+
+    setTimeout(() => {
+      grid[x][y].setIsExplored(() => true);
+    }, 500 + counter * speed);
+    counter++;
 
     while (!q.isEmpty()) {
       const size = q.size();
