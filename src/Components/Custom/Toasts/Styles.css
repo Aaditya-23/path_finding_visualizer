@@ -1,0 +1,17 @@
+.toast-wrapper {
+  padding: 1rem;
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  z-index: 2;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toast-message {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}

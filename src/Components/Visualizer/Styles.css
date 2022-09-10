@@ -1,0 +1,12 @@
+.visualizer {
+  position: relative;
+  height: 100vh;
+  background-color: hsl(203, 16%, 20%);
+}
+
+.visualizer-options {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: white;
+}
