@@ -327,6 +327,7 @@ export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
             if (grid[newX][newY].isTarget) {
               isFound = true;
 
+              //eslint-disable-next-line
               setTimeout(() => {
                 grid[newX][newY].setIsExplored(() => true);
                 front.path.push([newX, newY]);
@@ -350,6 +351,7 @@ export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
             });
             isVisited[newX][newY] = true;
 
+            //eslint-disable-next-line
             setTimeout(() => {
               grid[newX][newY].setIsExplored(() => true);
             }, 500 + counter * speed);
@@ -462,6 +464,7 @@ export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
       if (grid[currX][currY].isTarget) {
         isFound = true;
 
+        //eslint-disable-next-line
         setTimeout(() => {
           grid[tempX][tempY].setIsExplored(() => true);
           colorShortestPath(currX, currY);
@@ -470,6 +473,7 @@ export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
         break;
       }
 
+      //eslint-disable-next-line
       setTimeout(() => {
         grid[tempX][tempY].setIsExplored(() => true);
       }, 500 + counter * speed);
