@@ -11,9 +11,9 @@ export default function Visualizer({ props }) {
   const [currentAlgorithm, setCurrentAlgorithm] = useState("default");
   const [model, setModel] = useState("pillar");
   const [gridDimensions, setGridDimensions] = useState({
-    rows: 20,
-    columns: 20,
-    dropdown: 0,
+    rows: 40,
+    columns: 40,
+    dropdown: 2,
   });
   const [visualizingSpeed, setVisualizingSpeed] = useState(20);
 
