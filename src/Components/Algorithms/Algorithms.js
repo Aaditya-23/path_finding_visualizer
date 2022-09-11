@@ -93,8 +93,8 @@ export const GenerateVirtualGrid = (scene, gridDimensions) => {
   });
 };
 
-export const ClearGrid = (parameter) => {
-  if (!grid) return;
+export const ClearGrid = (parameter, scene, gridDimensions) => {
+  GenerateVirtualGrid(scene, gridDimensions);
 
   const row = grid.length;
   const column = grid[0].length;
@@ -200,9 +200,8 @@ export const GenerateMaze = {
 };
 
 export const DFS = (scene, gridDimensions, speed, setToastInfo) => {
-  ClearGrid(false);
   ResetIsVisited(gridDimensions);
-  GenerateVirtualGrid(scene, gridDimensions);
+  ClearGrid(false, scene, gridDimensions);
 
   let path = [];
   let isFound = false;
@@ -284,9 +283,8 @@ export const DFS = (scene, gridDimensions, speed, setToastInfo) => {
 };
 
 export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
-  ClearGrid(false);
+  ClearGrid(false, scene, gridDimensions);
   ResetIsVisited(gridDimensions);
-  GenerateVirtualGrid(scene, gridDimensions);
 
   let isFound = false;
   let counter = 0;
@@ -385,9 +383,8 @@ export const BFS = (scene, gridDimensions, speed, setToastInfo) => {
 };
 
 export const Dijkstra = (scene, gridDimensions, speed, setToastInfo) => {
-  ClearGrid(false);
+  ClearGrid(false, scene, gridDimensions);
   ResetIsVisited(gridDimensions);
-  GenerateVirtualGrid(scene, gridDimensions);
 
   let isFound = false;
   let counter = 0;

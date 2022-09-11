@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../Custom/Button/Button";
 import {
   DFS,
@@ -6,7 +6,6 @@ import {
   Dijkstra,
   ClearGrid,
   GenerateMaze,
-  GenerateVirtualGrid,
 } from "../Algorithms/Algorithms";
 import Toasts from "../Custom/Toasts/Toasts";
 import { Home, Info } from "@mui/icons-material";
@@ -30,11 +29,6 @@ export default function DialogBox({ props }) {
     setGridDimensions,
     setVisualizingSpeed,
   } = props;
-
-  useEffect(() => {
-    if (scene && scene.children.length > 0)
-      GenerateVirtualGrid(scene, gridDimensions);
-  }, [scene, gridDimensions]);
 
   const [toastInfo, setToastInfo] = useState({
     isOpen: false,
@@ -207,7 +201,7 @@ export default function DialogBox({ props }) {
 
         <div
           onClick={() => {
-            ClearGrid(false);
+            ClearGrid(false, scene, gridDimensions);
           }}
         >
           <Button
@@ -220,7 +214,7 @@ export default function DialogBox({ props }) {
 
         <div
           onClick={() => {
-            ClearGrid(true);
+            ClearGrid(true, scene, gridDimensions);
           }}
         >
           <Button
