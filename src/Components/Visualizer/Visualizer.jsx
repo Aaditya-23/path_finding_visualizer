@@ -13,7 +13,7 @@ export default function Visualizer({ props }) {
   const [gridDimensions, setGridDimensions] = useState({
     rows: 20,
     columns: 20,
-    dropdown: 2,
+    dropdown: 0,
   });
   const [visualizingSpeed, setVisualizingSpeed] = useState(20);
 
